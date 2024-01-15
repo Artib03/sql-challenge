@@ -32,7 +32,14 @@ where first_name like 'Hercules'
 and last_name like '%B%'
 
 --question 6 (employees in the sales department)
-Select d.dept_name, e.emp_no, e.last_name, e.first_name
+Select d.dept_name 
 from "Departments" as d
-inner join "Employees" as e
-where dept_name like 'Sales'
+where dept_name = 'Sales' in(
+select e.emp_no, e.first_name, e.last_name
+from "Employees" as e
+)
+
+
+
+
+
