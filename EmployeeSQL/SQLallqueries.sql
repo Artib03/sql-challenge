@@ -32,12 +32,30 @@ where first_name like 'Hercules'
 and last_name like '%B%'
 
 --question 6 (employees in the sales department)
-Select d.dept_name 
-from "Departments" as d
-where dept_name = 'Sales' in(
-select e.emp_no, e.first_name, e.last_name
+Select d.dept_name, e.emp_no, e.first_name, e.last_name
 from "Employees" as e
-)
+inner join "Dept_emp" as de
+on de.emp_no = e.emp_no
+inner join "Departments" as d
+on d.dept_no = de.dept_no
+where dept_name = 'Sales'
+
+--question 7 (employees in the sales and development departments)
+Select d.dept_name, e.emp_no, e.first_name, e.last_name
+from "Employees" as e
+inner join "Dept_emp" as de
+on de.emp_no = e.emp_no
+inner join "Departments" as d
+on d.dept_no = de.dept_no
+where d.dept_name in ('Sales', 'Development')
+
+--question 8 (frequency counts of the employees)
+select "Employees".last_name
+, count("Employees".emp_no) as "lastname_count"
+FROM "Employees"
+GROUP by "Employees".last_name
+order by "lastname_count" desc
+
 
 
 
